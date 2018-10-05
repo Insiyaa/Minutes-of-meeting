@@ -29,6 +29,8 @@ def syncDB(text, filename):
 
 @app.route("/")
 def index():
+    msg = "Go on and Upload the voice recording of your meeting in MP3 or WAV formats and hit the Go button. Here you'll get a brief summary of the meet and some important dates and persons of the same. A more verbose summary would be uploaded to dropbox with the same name as of the audio uploaded. "
+    flash(msg)
     return render_template('index.html')
 
 
@@ -59,11 +61,35 @@ def results():
             audio = r.record(source)
 
         text = r.recognize_ibm(audio, username="918493fe-7aab-48af-bc21-fd414d43a0fe", password="QSo5jRTeJdza")
-        re.sub('(\s)%\w+', '', text, flags=re.IGNORECASE)
+        text = re.sub('(\s)%\w+', '', text, flags=re.IGNORECASE)
         # print(text)
-        summary = summarize(text, ratio=0.15)
-        syncDB(summary)
-        flash('The summary of recording is: ----> ' + summary)
+        summary = summarize(text, ratio=0.20)
+        syncDB(summary, filename[:-3])
+
+        summary_print = summarize(text, ratio=0.15)
+
+
+
+        from nltk.tag import StanfordNERTagger
+        tagger = StanfordNERTagger('/home/insiyeah/stanford-ner/classifiers/english.all.3class.distsim.crf.ser.gz',
+                                    '/home/insiyeah/stanford-ner/stanford-ner.jar', encoding='utf-8')
+        tags = tagger.tag(summary)
+        ner_dict = {"PERSON":[], "ORGANIZATION":[], "LOCATION":[]}
+
+        for tag in tags:
+            if tag[1] == "PERSON":
+                ner_dict["PERSON"].append(tag[0])
+            elif tag[1] == "ORGANIZATION":
+                ner_dict["ORGANIZATION"].append(tag[0])
+            elif tag[1] == "LOCATION":
+                ner_dict["LOCATION"].append(tag[0])
+
+        persons = ", ".join(ner_dict["PERSON"])
+        locs = ", ".join(ner_dict["LOCATION"])
+        orgs = ", ".join(ner_dict["ORGANIZATION"])
+
+        flash_data = "The brief summary is" + summary_print + ".<br>" + "Some important tags are: <br>" + "Person involved: " + persons + "<br>"+ "Locations discussed: " + locs + "<br>" + "Organizations: " + orgs
+        flash(flash_data)
         return render_template('index.html')
         
 

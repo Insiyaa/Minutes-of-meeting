@@ -4,83 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"/> -->
-    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet"> 
-    <title>{% block title %}{% endblock %}</title>
+    <meta name="keywords" content="times-table mandelbrot Modular-multiplication patterns mathematics visualization circular-times-table">
+    <meta name="author" content="Insiyah Hajoori">
+    <title>Minutes of Meeting</title>
+    <style>
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-gap: 15px;
+            grid-template-rows: 1fr 8fr 1fr; 
+            grid-template-columns: auto;
+            grid-template-areas: "navbar"
+                                "content"
+                                "footer";
+            background: black;
+        }
+
+        #navbar {
+            grid-area: navbar;
+            background: #ee4c7c;
+            font-weight: bolder;
+            text-align: center;
+        }
+
+        #navbar h1 {
+            /* text-align: center; */
+            font-weight: bolder;
+            vertical-align: middle;
+        }
+
+        .content {
+            height: 100%;
+            grid-area: content;
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            grid-template-rows: auto;
+            grid-template-areas: "canvas controls";
+        }
+
+        #footer {
+            grid-area: footer;
+            background: #5d001e;
+            color: #e3afbc;
+        }
+
+        .content #canvas {
+            grid-area: canvas;
+            background: white;
+        }
+
+        .content #controls {
+            grid-area: controls;
+            background: #e3afbc;
+            text-align: center;
+        }
+
+        input {
+            border: 1px solid darkgray;
+            border-radius: 5px;
+            height: 30px;
+            margin: 10px;
+        }
+
+        label {
+            text-align: left;
+        }
+
+        h4 {
+            text-align: center;
+        }
+    </style>
 </head>
-<style>
-    html, body {
-        margin: 0;
-        min-height: 100%;
-    }
-    .container {
-        display: grid;
-        grid-template-rows: 1fr 8fr 1fr;
-        grid-gap: 15px;
-        grid-template-columns: auto;
-        grid-template-areas: "navbar"
-                             "content"
-                             "footer"; 
-        background: #2b2c28;       
-    }
-    #navbar {
-        font-family: 'Righteous', cursive;
-        vertical-align: center;
-        grid-area: navbar;
-        background: linear-gradient(45deg, #1EC2C4, #1EC2C4, #1EC2C4, #1EC2C4,black);
-        color: #131515;
-        align-content: center;
-        text-align: center;
-    }
-    .content {
-        font-family: 'Aldrich', sans-serif;
-        align-content: center;
-        text-align: center;
-        background: url("{{ url_for('static', filename='bg.jpg') }}");
-        background-repeat: no-repeat;
-        background-size: cover;
-        color: #131515;
-        padding: 30px;
-        font-size: 20px;
-    }
-    .alert {
-        text-align: center;
-        color: #131515;
-        font-family: 'Aldrich', sans-serif;
-        font-size: 20px;
-        margin: 20px;
-    }
-    .footer {
-        font-family: 'Aldrich', sans-serif;
-        text-align: center;
-        vertical-align: middle;
-        background: #1EC2C4;
-        color: #131515; 
-        display: table-cell;
-        vertical-align: middle;
-        line-height: normal;
-    }
-</style>
-<body>
+<body onload="generate(2, 300)">
     <div class="container">
         <div id="navbar">
-            <h1>Minutes : of : meeting</h1>
+            <h1>
+                Minutes of Meeting
+            </h1>
         </div>
-        <div class="content" background=>
-            {% block main %}{% endblock %}
-
-            {% if get_flashed_messages() %}
-            <div class="alert">
-                {{ get_flashed_messages() | join(" ") }}
-            </div>
-        {% endif %}
+        <div class="content">
+                {% block main %}
+                {% endblock %}
         </div>
-        <div class="footer">
-            <br>
-            <br>
-            KJSCE HACK
+        <div id="footer">
+            
         </div>
     </div>
+    <a href="#"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <script src="script.js"></script>
 </body>
 </html>
