@@ -115,7 +115,7 @@ def results():
         actn = text.find('need')
         actn = text[actn:1380]
         dtime = str(datetime.datetime.now().date())
-        flash_data = "<b>Title: </b>" + title + ".<br> <i>Date: " + dtime + "</i>" + "<hr><br><b> The Agenda is: </b>" + str(agenda) + "<br><b>Attendees</b> " + str(persons)+ "<br><b>Actions Required: </b>" + str(actn) + ".<br>" + "<br><i>Some important tags are:</i> " + "<br>"+ "<b>Locations discussed:</b> " + str(locs) + "<br>" + "<b>Organizations:</b> " + str(orgs)
+        flash_data = "<b>Title: </b>" + title + ".<br> <i>Date: " + dtime + "</i>" + "<hr><br><b> The Agenda is: </b>" + str(agenda) + "<br><b>Attendees</b> " + str(persons)+ "<br><b>Actions Required: </b>" + str(actn) + ".<br>" + "<br><i>Some important tags are:</i> " + "<br>"+ "<b>Locations discussed:</b> " + str(locs) + "<br>" + "<b>Organizations:</b> " + str(orgs) + "<br><br><button>Share</button>"
 
         flash(flash_data)
 
