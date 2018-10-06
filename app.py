@@ -120,6 +120,7 @@ def results():
         flash(flash_data)
 
         # More verbose summary
+        # Gensim summary
         summary = summarize(text, ratio=0.1)
         sync_data = "Title: " + title + "\nDate:" + dtime + "\nThe Agenda is:\n" + agenda + "\nAttendees: " + persons + "\nActions Required: \n" + actn + ".\n" + "Some important tags are: \n" + "\n"+ "Locations discussed: " + locs + "\n" + "Organizations: " + orgs + "\n.Date: " + dtime + "." + "\n\nVerbose Summary: \n" + summary
 
