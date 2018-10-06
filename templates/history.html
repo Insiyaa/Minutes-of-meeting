@@ -1,24 +1,27 @@
 {% extends "layout.html" %}
 
 {% block main %}
-    <table style="width:100%; border: 3px solid #000000;">
-      <thead style="font-size: 15px;font-weight: bold;color: #000000;text-align: left;">
-      <tr>
-        <th>No.</th>
-        <th>Title</th>
-        <th>Agenda</th>
-        <th>Date Added</th>
-        <th>Link</th>
-      </tr>
-      </thead>
-    {% for val in values %}
-      <tr style="border: 1px solid #000000; padding: 5px 4px;">
-        <td style="font-weight: bold">{{ val.id }}</td>
-        <td style="font-weight: bold">{{ val.title }}</td>
-        <td>{{ val.agenda }}</td>
-        <td>{{ val.date }}</td>
-        <td>{{ val.link }}</td>
-      </tr>
-    {% endfor %}
-    </table>
+    <div id="canvas">
+        <table style="width:100%; border: 0px solid #000000;color: #000000; border-spacing: 30px;margin-top: 10px; ">
+            <thead style="font-size: 15px;font-weight: bold;color: #000000;text-align: left;">
+            <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Agenda</th>
+            <th>Date</th>
+            <th>Link</th>
+            </tr>
+            </thead>
+            {% for row in data %}
+            <tr style="border: 1px solid #000000; padding: 5px 4px;">
+            {% for cell in row %}
+            <td style="">{{ cell }}</td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div id="controls">
+        <iframe style="margin-top: 30px" src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showTz=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=408qvnlad9olqa4fl3e6djurks%40group.calendar.google.com&amp;color=%23711616&amp;ctz=Asia%2FCalcutta" style="border-width:0" width="600" height="400" frameborder="0" scrolling="no"></iframe>
+    </div>
 {% endblock %}
