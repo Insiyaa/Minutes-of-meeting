@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <table style="width:100%; border: 3px solid #000000;">
+      <thead style="font-size: 15px;font-weight: bold;color: #000000;text-align: left;">
+      <tr>
+        <th>No.</th>
+        <th>Title</th>
+        <th>Agenda</th>
+        <th>Date Added</th>
+        <th>Link</th>
+      </tr>
+      </thead>
+    {% for val in values %}
+      <tr style="border: 1px solid #000000; padding: 5px 4px;">
+        <td style="font-weight: bold">{{ val.id }}</td>
+        <td style="font-weight: bold">{{ val.title }}</td>
+        <td>{{ val.agenda }}</td>
+        <td>{{ val.date }}</td>
+        <td>{{ val.link }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

@@ -23,7 +23,9 @@
         }
 
         #navbar {
+            display: grid;
             grid-area: navbar;
+            grid-template-columns: 3fr 3fr 3fr 5fr;
             background: #ee4c7c;
             font-weight: bolder;
             text-align: center;
@@ -80,9 +82,15 @@
 <body onload="generate(2, 300)">
     <div class="container">
         <div id="navbar">
-            <h1>
+            <h3>
                 Minutes of Meeting
-            </h1>
+            </h3>
+            <h5>
+                <a href="/"> Analyze </a>
+            </h5>
+            <h5>
+                <a href="/history"> History </a>
+            </h5>
         </div>
         <div class="content">
                 {% block main %}
